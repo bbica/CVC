@@ -1,0 +1,13 @@
+name: ClinicalVariantClassifier
+title: ClinicalVariantClassifier
+username: bbica
+account: bbica
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 12067171
+bundleId: 8658121
+url: https://bbica.shinyapps.io/ClinicalVariantClassifier/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: model_script.R|README.md

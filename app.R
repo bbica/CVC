@@ -34,11 +34,12 @@ ui <- fluidPage(
         shiny::titlePanel(title = div(
             shiny::splitLayout(
                 cellWidths = NULL,
-                h4("CVC - Clinical Variant Classifier", align = "left"),
+                h3("CVC - Clinical Variant Classifier", align = "left"),
                 div(
                     style = "position:absolute;top:1em; right:1em;",
-                    a(img(height = 60, width = 60, src="www/logo.png"), href="https://github.com/bbica/") ,
-                ))
+                    a(img(height = 50, width = 50, src="logo.png"), href="https://github.com/bbica/CVC") ,
+                   #tags$img(src="logo.png"),width=2
+                ))#end splitLayout
         ))
         
     ),#end of div
@@ -48,7 +49,7 @@ ui <- fluidPage(
             actionButton("predict_call", "Predict")
         ),
         mainPanel( 
-            h5("Historical data from MongoDB"),
+            h4("Historical data from MongoDB"),
             DTOutput("historical_table"),
             br(),
             DTOutput("prediction_table")
@@ -76,10 +77,9 @@ server <- function(input, output) {
         # user_data$df$functional_annotation <- as.factor(user_data$df$functional_annotation)
         # user_data$df$CADD<-as.double
         
-        
         output$prediction_table<-renderDT(user_data$df)
         
-    })#end observeEvent input
+    })#end observeEvent file
     
     observeEvent(input$predict_call, {
         user_data$df<-rbind(variable_data$historical_data[1,-7], user_data$df)
@@ -87,7 +87,7 @@ server <- function(input, output) {
         predictions <- predict(variable_data$model, newdata = user_data$df) 
         user_data$df$prediction<-predictions
         output$prediction_table<-renderDT(user_data$df)
-    })#
+    })#end observeEvent predict_call
     
     
     
